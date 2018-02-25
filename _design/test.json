@@ -6,6 +6,10 @@
   {
     "all": {
       "map": "function(doc) { if (doc.baseType == 'cmis:document')  emit(null, doc) }"
+    },
+    "map_and_reduce": {
+      "map": "function(doc) { if (doc.baseType == 'cmis:document')  emit(null, doc) }",
+      "reduce": "function(keys, values) { return sum(values) }"
     }
   }
 }
