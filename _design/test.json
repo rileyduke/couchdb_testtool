@@ -8,7 +8,7 @@
       "map": "function(doc) { if (doc.baseType == 'cmis:document')  emit(null, doc) }"
     },
     "map_and_reduce": {
-      "map": "function(doc) { if (doc.baseType == 'cmis:document')  emit(null, doc) }",
+      "map": "function(doc) { if (doc.baseType == 'cmis:document')  emit(doc,1) }",
       "reduce": "function(keys, values) { return sum(values) }"
     }
   }
