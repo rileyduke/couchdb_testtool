@@ -1,0 +1,11 @@
+{
+  "_id":"_design/files",
+  "_rev":"1",
+  "language": "javascript",
+  "views":
+  {
+    "all": {
+      "map": "function(doc) { if (doc.baseType == 'cmis:document')  emit(null, doc) }"
+    }
+  }
+}
