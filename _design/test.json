@@ -1,14 +1,15 @@
 {
-  "_id":"_design/files",
-  "_rev":"1",
+  "_id": "_design/files",
   "language": "javascript",
-  "views":
-  {
+  "views": {
     "all": {
       "map": "function(doc) { if (doc.baseType == 'cmis:document')  emit(null, doc) }"
     },
+    "cmis_root_folder": {
+      "map": "function(doc){ if(doc.baseType=='cmis:folder' && doc.objectId == 'e02f784f8360a02cc14d1314c10038ff') emit(null,doc)}"
+    },
     "map_and_reduce": {
-      "map": "function(doc) { if (doc.baseType == 'cmis:document')  emit(doc,1) }",
+      "map": "function(doc) { if (doc.baseType == 'cmis:document')  emit([doc.name,doc.versionSeriesId],1) }",
       "reduce": "function(keys, values) { return sum(values) }"
     }
   }
