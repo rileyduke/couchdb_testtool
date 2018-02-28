@@ -11,6 +11,11 @@
     "map_and_reduce": {
       "map": "function(doc) { if (doc.baseType == 'cmis:document')  emit([doc.name,doc.versionSeriesId],1) }",
       "reduce": "function(keys, values) { return sum(values) }"
+    },
+    "map_and_reduce_latest_version": {
+      "map": "function(doc) { if (doc.baseType == 'cmis:document' && doc.latest = true)  emit([doc.name,doc.versionSeriesId],1) }",
+      "reduce": "function(keys, values) { return sum(values) }"
     }
+
   }
 }

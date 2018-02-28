@@ -1,4 +1,6 @@
 $(function(){
+
+	$(".progress").hide();
 	// $.ajax({
 	// 	url: 'http://localhost:5984/bedroom/_design/files/_view/map_and_reduce?group_level=1&group_level=2',
 	// 	type: 'GET',
@@ -12,9 +14,17 @@ $(function(){
 	// 		console.log(jqXHR + " " + text + " " + errorThrown);
 	// 	}
 	// });
+	$("#get-button").click(function(){
+		var url = $("#get-url").val();
 
-	$.get('http://localhost:5984/bedroom/_design/files/_view/map_and_reduce?group_level=1&group_level=2', function(data){
-		console.log(data);
-		$("#result").text(JSON.stringify(data));
+		$(".progress").show();
+		$.get(url, function(data){
+
+			$(".progress").hide();
+			console.log(data);
+
+			$("#result").text(JSON.stringify(data));
+		});
 	});
+	
 })
