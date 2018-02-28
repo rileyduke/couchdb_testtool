@@ -10,7 +10,7 @@
     },
     "map_and_reduce": {
       "map": "function(doc) { if (doc.baseType == 'cmis:document')  emit([doc.name,doc.versionSeriesId],1) }",
-      "reduce": "function(keys, values) { return sum(values) }"
+      "reduce": "function(keys, values, rereduce) { if(!rereduce) { return sum(values); } else { var s = values.reduce(function(total, num) { return total + num;}); return s > 1 ? s : null  } }"
     },
     "map_and_reduce_latest_version": {
       "map": "function(doc) { if (doc.baseType == 'cmis:document' && doc.latest = true)  emit([doc.name,doc.versionSeriesId],1) }",
