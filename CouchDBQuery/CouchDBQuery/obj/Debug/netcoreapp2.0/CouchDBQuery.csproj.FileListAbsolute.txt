@@ -9,3 +9,14 @@ C:\Users\Work\Desktop\NemakiWare\CouchDBQuery\CouchDBQuery\obj\Debug\netcoreapp2
 C:\Users\Work\Desktop\NemakiWare\CouchDBQuery\CouchDBQuery\obj\Debug\netcoreapp2.0\CouchDBQuery.AssemblyInfo.cs
 C:\Users\Work\Desktop\NemakiWare\CouchDBQuery\CouchDBQuery\obj\Debug\netcoreapp2.0\CouchDBQuery.dll
 C:\Users\Work\Desktop\NemakiWare\CouchDBQuery\CouchDBQuery\obj\Debug\netcoreapp2.0\CouchDBQuery.pdb
+C:\Users\Work\Documents\GitHub\couchdb_testtool\CouchDBQuery\CouchDBQuery\bin\Debug\netcoreapp2.0\CouchDBQuery.deps.json
+C:\Users\Work\Documents\GitHub\couchdb_testtool\CouchDBQuery\CouchDBQuery\bin\Debug\netcoreapp2.0\CouchDBQuery.runtimeconfig.json
+C:\Users\Work\Documents\GitHub\couchdb_testtool\CouchDBQuery\CouchDBQuery\bin\Debug\netcoreapp2.0\CouchDBQuery.runtimeconfig.dev.json
+C:\Users\Work\Documents\GitHub\couchdb_testtool\CouchDBQuery\CouchDBQuery\bin\Debug\netcoreapp2.0\CouchDBQuery.dll
+C:\Users\Work\Documents\GitHub\couchdb_testtool\CouchDBQuery\CouchDBQuery\bin\Debug\netcoreapp2.0\CouchDBQuery.pdb
+C:\Users\Work\Documents\GitHub\couchdb_testtool\CouchDBQuery\CouchDBQuery\obj\Debug\netcoreapp2.0\CouchDBQuery.csprojResolveAssemblyReference.cache
+C:\Users\Work\Documents\GitHub\couchdb_testtool\CouchDBQuery\CouchDBQuery\obj\Debug\netcoreapp2.0\CouchDBQuery.csproj.CoreCompileInputs.cache
+C:\Users\Work\Documents\GitHub\couchdb_testtool\CouchDBQuery\CouchDBQuery\obj\Debug\netcoreapp2.0\CouchDBQuery.AssemblyInfoInputs.cache
+C:\Users\Work\Documents\GitHub\couchdb_testtool\CouchDBQuery\CouchDBQuery\obj\Debug\netcoreapp2.0\CouchDBQuery.AssemblyInfo.cs
+C:\Users\Work\Documents\GitHub\couchdb_testtool\CouchDBQuery\CouchDBQuery\obj\Debug\netcoreapp2.0\CouchDBQuery.dll
+C:\Users\Work\Documents\GitHub\couchdb_testtool\CouchDBQuery\CouchDBQuery\obj\Debug\netcoreapp2.0\CouchDBQuery.pdb

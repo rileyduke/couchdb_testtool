@@ -4,7 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Runtime.Serialization.Json;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CouchDBQuery
 {
@@ -150,12 +153,52 @@ namespace CouchDBQuery
         public static int PageSize = 2;
 
         /// <summary>
+        /// tasks for querying
+        /// </summary>
+        public static List<Task> TaskList = new List<Task>();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static List<string> MissingRelationships = new List<string>();
+
+        /// <summary>
+        /// http client
+        /// </summary>
+        public static HttpClient client = new HttpClient();
+
+        public static async Task<bool> CheckDocument(string id, string RelationshipId)
+        {
+            HttpResponseMessage response = await client.GetAsync(GetDocumentUrl + "%22" + id + "%22");
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            DocJsonResponse CheckedDoc = JsonConvert.DeserializeObject<DocJsonResponse>(responseBody);
+
+            if(CheckedDoc.rows.Count == 0)
+            {
+                MissingRelationships.Add(RelationshipId);
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// get a document from couchdb
+        /// </summary>
+        /// <param name="r"></param>
+        public static async Task GetDocument(RelRowObject r)
+        {
+            await CheckDocument(r.value.sourceId, r.id);
+            await CheckDocument(r.value.targetId, r.id);
+        }
+
+        /// <summary>
         /// main
         /// </summary>
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            List<string> MissingRelationships = new List<string>();
 
             //download the list of relationships
             var RelJSONString = new WebClient().DownloadString(GetRelationshipUrl);
@@ -164,28 +207,18 @@ namespace CouchDBQuery
             //check parentId and targetId in each relationship
             foreach (RelRowObject r in Relationships.rows)
             {
-                var TargetJSONString = new WebClient().DownloadString(GetDocumentUrl + "%22" + r.value.targetId + "%22"); //r.value.targetId
-                DocJsonResponse TargetDoc = JsonConvert.DeserializeObject<DocJsonResponse>(TargetJSONString);
-                if(TargetDoc.rows.Count == 0)
-                {
-                    //didn't find that id on target
-                    MissingRelationships.Add(r.id);
-                }
-                else
-                {
-                    var SourceJSONString = new WebClient().DownloadString(GetDocumentUrl + "%22" + r.value.sourceId + "%22"); //r.value.targetId
-                    DocJsonResponse SourceDoc = JsonConvert.DeserializeObject<DocJsonResponse>(SourceJSONString);
-                    if(SourceDoc.rows.Count == 0)
-                    {
-                        //didn't find that id on source
-                        MissingRelationships.Add(r.id);
-                    }
-                }
+                TaskList.Add(GetDocument(r));
             }
-            foreach(string rel in MissingRelationships)
+
+            //wait for all threads to finish
+            Task.WaitAll(TaskList.ToArray());
+
+            foreach (string rel in MissingRelationships)
             {
                 Console.WriteLine("Missing Relationship: " + rel);
             }
+
+            Console.WriteLine("done");
 
             Console.ReadKey();
         }
