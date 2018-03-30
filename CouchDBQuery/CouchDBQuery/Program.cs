@@ -97,24 +97,6 @@ namespace CouchDBQuery
         public string name { get; set; }
         public string description { get; set; }
         public string parentId { get; set; }
-        //public string aclInherited { get; set; }
-        //public string subTypeProperties { get; set; }
-        //public string aspects { get; set; }
-        //public string objectType { get; set; }
-        //public string changeToken { get; set; }
-        //public string attachmentNodeId { get; set; }
-        //public string versionSeriesId { get; set; }
-        //public string latestMajorVersion { get; set; }
-        //public string majorVersion { get; set; }
-        //public string versionLabel { get; set; }
-        //public string privateWorkingCopy { get; set; }
-        //public string content { get; set; }
-        //public string document { get; set; }
-        //public string folder { get; set; }
-        //public string attachment { get; set; }
-        //public string relationship { get; set; }
-        //public string policy { get; set; }
-        //public string latestVersion { get; set; }
     }
 
     /// <summary>
@@ -167,14 +149,23 @@ namespace CouchDBQuery
         /// </summary>
         public static HttpClient client = new HttpClient();
 
+        /// <summary>
+        /// Check document - if nothing is returned then add to missing list
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="RelationshipId"></param>
+        /// <returns></returns>
         public static async Task<bool> CheckDocument(string id, string RelationshipId)
         {
+            //get the JSON response from couchdb
             HttpResponseMessage response = await client.GetAsync(GetDocumentUrl + "%22" + id + "%22");
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
 
+            //serialize 
             DocJsonResponse CheckedDoc = JsonConvert.DeserializeObject<DocJsonResponse>(responseBody);
 
+            //add to missing list
             if(CheckedDoc.rows.Count == 0)
             {
                 MissingRelationships.Add(RelationshipId);
