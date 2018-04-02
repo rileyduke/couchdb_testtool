@@ -69,15 +69,15 @@ namespace CouchDBQuery
     class Relationship
     {
         public string _id { get; set; }
-        public string _rev { get; set; }
-        public string type { get; set; }
-        public string created { get; set; }
-        public string creator { get; set; }
-        public string modified { get; set; }
-        public string modifier { get; set; }
-        public string name { get; set; }
-        public string objectType { get; set; }
-        public string changeToken { get; set; }
+        //public string _rev { get; set; }
+        //public string type { get; set; }
+        //public string created { get; set; }
+        //public string creator { get; set; }
+        //public string modified { get; set; }
+        //public string modifier { get; set; }
+        //public string name { get; set; }
+        //public string objectType { get; set; }
+        //public string changeToken { get; set; }
         public string sourceId { get; set; }
         public string targetId { get; set; }
     }
@@ -88,15 +88,15 @@ namespace CouchDBQuery
     class Document
     {
         public string _id { get; set; }
-        public string _rev { get; set; }
-        public string type { get; set; }
-        public string created { get; set; }
-        public string creator { get; set; }
-        public string modified { get; set; }
-        public string modifier { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
-        public string parentId { get; set; }
+        //public string _rev { get; set; }
+        //public string type { get; set; }
+        //public string created { get; set; }
+        //public string creator { get; set; }
+        //public string modified { get; set; }
+        //public string modifier { get; set; }
+        //public string name { get; set; }
+        //public string description { get; set; }
+        //public string parentId { get; set; }
     }
 
     /// <summary>
