@@ -99,6 +99,12 @@ namespace CouchDBQuery
         //public string parentId { get; set; }
     }
 
+    class MissingRelationship
+    {
+        public string RelationshipId { get; set; }
+        public string DocumentId { get; set; }
+    }
+
     /// <summary>
     /// Program / logic
     /// </summary>
@@ -142,7 +148,7 @@ namespace CouchDBQuery
         /// <summary>
         /// 
         /// </summary>
-        public static List<string> MissingRelationships = new List<string>();
+        public static List<MissingRelationship> MissingRelationships = new List<MissingRelationship>();
 
         /// <summary>
         /// http client
@@ -168,7 +174,11 @@ namespace CouchDBQuery
             //add to missing list
             if(CheckedDoc.rows.Count == 0)
             {
-                MissingRelationships.Add(RelationshipId);
+                MissingRelationships.Add(new MissingRelationship()
+                {
+                    DocumentId = id,
+                    RelationshipId = RelationshipId
+                });
             }
 
             return true;
@@ -204,10 +214,14 @@ namespace CouchDBQuery
             //wait for all threads to finish
             Task.WaitAll(TaskList.ToArray());
 
-            foreach (string rel in MissingRelationships)
+
+            List<string> OutputLines = new List<string>();
+            foreach (MissingRelationship rel in MissingRelationships)
             {
-                Console.WriteLine("Missing Relationship: " + rel);
+                OutputLines.Add("Relationship: " + rel.RelationshipId + ", Document: " + rel.DocumentId);
             }
+
+            System.IO.File.WriteAllLines(@"\Users\Public\CouchDBMissingRelationships" + DateTime.Now.ToString("yyyyMMddhhmmss") +  ".txt", OutputLines);
 
             Console.WriteLine("done");
 
