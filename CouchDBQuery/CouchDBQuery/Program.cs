@@ -161,23 +161,31 @@ namespace CouchDBQuery
         /// <returns></returns>
         public static async Task<bool> CheckDocument(string id, string RelationshipId)
         {
-            //get the JSON response from couchdb
-            HttpResponseMessage response = await client.GetAsync(GetDocumentUrl + "%22" + id + "%22");
-            response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-
-            //serialize 
-            DocJsonResponse CheckedDoc = JsonConvert.DeserializeObject<DocJsonResponse>(responseBody);
-
-            //add to missing list
-            if(CheckedDoc.rows.Count == 0)
+            try
             {
-                MissingRelationships.Add(new MissingRelationship()
+                //get the JSON response from couchdb
+                HttpResponseMessage response = await client.GetAsync(GetDocumentUrl + "%22" + id + "%22");
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                //serialize 
+                DocJsonResponse CheckedDoc = JsonConvert.DeserializeObject<DocJsonResponse>(responseBody);
+
+                //add to missing list
+                if (CheckedDoc.rows.Count == 0)
                 {
-                    DocumentId = id,
-                    RelationshipId = RelationshipId
-                });
+                    MissingRelationships.Add(new MissingRelationship()
+                    {
+                        DocumentId = id,
+                        RelationshipId = RelationshipId
+                    });
+                }
             }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            
 
             return true;
         }
