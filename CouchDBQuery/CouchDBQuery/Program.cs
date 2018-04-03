@@ -67,15 +67,6 @@ namespace CouchDBQuery
     class Relationship
     {
         public string _id { get; set; }
-        //public string _rev { get; set; }
-        //public string type { get; set; }
-        //public string created { get; set; }
-        //public string creator { get; set; }
-        //public string modified { get; set; }
-        //public string modifier { get; set; }
-        //public string name { get; set; }
-        //public string objectType { get; set; }
-        //public string changeToken { get; set; }
         public string sourceId { get; set; }
         public string targetId { get; set; }
     }
@@ -86,15 +77,6 @@ namespace CouchDBQuery
     class Document
     {
         public string _id { get; set; }
-        //public string _rev { get; set; }
-        //public string type { get; set; }
-        //public string created { get; set; }
-        //public string creator { get; set; }
-        //public string modified { get; set; }
-        //public string modifier { get; set; }
-        //public string name { get; set; }
-        //public string description { get; set; }
-        //public string parentId { get; set; }
     }
 
     class MissingRelationship
@@ -116,17 +98,17 @@ namespace CouchDBQuery
         /// <summary>
         /// relationship URL
         /// </summary>
-        public static string GetRelationshipUrl = ConfigurationManager.AppSettings["GetRelationshipUrl"];//"http://localhost:5984/bedroom/_design/_repo/_view/relationships";
+        public static string GetRelationshipUrl = ConfigurationManager.AppSettings["GetRelationshipUrl"];
 
         /// <summary>
         /// relationships count
         /// </summary>
-        public static string GetRelationshipCountUrl = ConfigurationManager.AppSettings["GetRelationshipCountUrl"];//"http://localhost:5984/bedroom/_design/files/_view/relationships_count";
+        public static string GetRelationshipCountUrl = ConfigurationManager.AppSettings["GetRelationshipCountUrl"];
 
         /// <summary>
         /// documents url
         /// </summary>
-        public static string GetDocumentUrl = ConfigurationManager.AppSettings["GetDocumentUrl"];//"http://localhost:5984/bedroom/_design/_repo/_view/documents?key=";
+        public static string GetDocumentUrl = ConfigurationManager.AppSettings["GetDocumentUrl"];
 
         /// <summary>
         /// relationship count (for paging)
@@ -141,7 +123,7 @@ namespace CouchDBQuery
         /// <summary>
         /// tasks for querying
         /// </summary>
-        public static List<Task> TaskList = new List<Task>();
+        public static List<Action> TaskList = new List<Action>();
 
         /// <summary>
         /// 
@@ -153,23 +135,27 @@ namespace CouchDBQuery
         /// </summary>
         public static HttpClient client = new HttpClient();
 
+
+        public static int ThreadCount = 0;
+        public static int CompletedThreadCount = 0;
+        public static ProgressBar Progress;
+
         /// <summary>
         /// Check document - if nothing is returned then add to missing list
         /// </summary>
         /// <param name="id"></param>
         /// <param name="RelationshipId"></param>
         /// <returns></returns>
-        public static async Task<bool> CheckDocument(string id, string RelationshipId)
+        public static void CheckDocument(string id, string RelationshipId)
         {
             try
             {
+                WebClient wClient = new WebClient();
                 //get the JSON response from couchdb
-                HttpResponseMessage response = await client.GetAsync(GetDocumentUrl + "%22" + id + "%22");
-                response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
+                var response = wClient.DownloadString(GetDocumentUrl + "%22" + id + "%22");
 
                 //serialize 
-                DocJsonResponse CheckedDoc = JsonConvert.DeserializeObject<DocJsonResponse>(responseBody);
+                DocJsonResponse CheckedDoc = JsonConvert.DeserializeObject<DocJsonResponse>(response);
 
                 //add to missing list
                 if (CheckedDoc.rows.Count == 0)
@@ -180,24 +166,25 @@ namespace CouchDBQuery
                         RelationshipId = RelationshipId
                     });
                 }
+
+                CompletedThreadCount++;
+                Progress.Report((double)CompletedThreadCount / ThreadCount);
             }
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
             }
             
-
-            return true;
         }
 
         /// <summary>
         /// get a document from couchdb
         /// </summary>
         /// <param name="r"></param>
-        public static async Task GetDocument(RelRowObject r)
+        public static void GetDocument(RelRowObject r)
         {
-            await CheckDocument(r.value.sourceId, r.id);
-            await CheckDocument(r.value.targetId, r.id);
+             CheckDocument(r.value.sourceId, r.id);
+             CheckDocument(r.value.targetId, r.id);
         }
 
         /// <summary>
@@ -206,22 +193,27 @@ namespace CouchDBQuery
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            
-
             //download the list of relationships
+            Console.WriteLine("Downloading relationships...");
             var RelJSONString = new WebClient().DownloadString(GetRelationshipUrl);
             RelJsonResponse Relationships = JsonConvert.DeserializeObject<RelJsonResponse>(RelJSONString);
 
+            ThreadCount = Relationships.rows.Count;
+            
             //check parentId and targetId in each relationship
             foreach (RelRowObject r in Relationships.rows)
             {
-                TaskList.Add(GetDocument(r));
+                TaskList.Add(() => GetDocument(r));
             }
 
-            //wait for all threads to finish
-            Task.WaitAll(TaskList.ToArray());
+            //invoke all tasks in parallel
+            Console.WriteLine("Checking each relationship...");
+            Progress = new ProgressBar();
+            var options = new ParallelOptions { MaxDegreeOfParallelism = Convert.ToInt32(ConfigurationManager.AppSettings["MaxParallelism"]) };
+            Parallel.Invoke(options, TaskList.ToArray());
 
-
+            Progress.Dispose();
+            
             List<string> OutputLines = new List<string>();
             foreach (MissingRelationship rel in MissingRelationships)
             {
@@ -230,7 +222,7 @@ namespace CouchDBQuery
 
             System.IO.File.WriteAllLines(ConfigurationManager.AppSettings["SaveFilePath"] + DateTime.Now.ToString("yyyyMMddhhmmss") +  ".txt", OutputLines);
 
-            Console.WriteLine("done");
+            Console.WriteLine("\n done");
 
             Console.ReadKey();
         }
