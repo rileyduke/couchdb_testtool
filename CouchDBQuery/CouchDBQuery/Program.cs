@@ -1,13 +1,11 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Runtime.Serialization.Json;
-using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using System.Configuration;
 
 namespace CouchDBQuery
 {
@@ -113,22 +111,22 @@ namespace CouchDBQuery
         /// <summary>
         /// couchdb url
         /// </summary>
-        public static string CouchDBUrl = "http://localhost:5984/";
+        public static string CouchDBUrl = ConfigurationManager.AppSettings["CouchDBUrl"];
 
         /// <summary>
         /// relationship URL
         /// </summary>
-        public static string GetRelationshipUrl = "http://localhost:5984/bedroom/_design/_repo/_view/relationships";
+        public static string GetRelationshipUrl = ConfigurationManager.AppSettings["GetRelationshipUrl"];//"http://localhost:5984/bedroom/_design/_repo/_view/relationships";
 
         /// <summary>
         /// relationships count
         /// </summary>
-        public static string GetRelationshipCountUrl = "http://localhost:5984/bedroom/_design/files/_view/relationships_count";
+        public static string GetRelationshipCountUrl = ConfigurationManager.AppSettings["GetRelationshipCountUrl"];//"http://localhost:5984/bedroom/_design/files/_view/relationships_count";
 
         /// <summary>
         /// documents url
         /// </summary>
-        public static string GetDocumentUrl = "http://localhost:5984/bedroom/_design/_repo/_view/documents?key=";
+        public static string GetDocumentUrl = ConfigurationManager.AppSettings["GetDocumentUrl"];//"http://localhost:5984/bedroom/_design/_repo/_view/documents?key=";
 
         /// <summary>
         /// relationship count (for paging)
@@ -200,6 +198,7 @@ namespace CouchDBQuery
         /// <param name="args"></param>
         static void Main(string[] args)
         {
+            
 
             //download the list of relationships
             var RelJSONString = new WebClient().DownloadString(GetRelationshipUrl);
@@ -221,7 +220,7 @@ namespace CouchDBQuery
                 OutputLines.Add("Relationship: " + rel.RelationshipId + ", Document: " + rel.DocumentId);
             }
 
-            System.IO.File.WriteAllLines(@"\Users\Public\CouchDBMissingRelationships" + DateTime.Now.ToString("yyyyMMddhhmmss") +  ".txt", OutputLines);
+            System.IO.File.WriteAllLines(ConfigurationManager.AppSettings["SaveFilePath"] + DateTime.Now.ToString("yyyyMMddhhmmss") +  ".txt", OutputLines);
 
             Console.WriteLine("done");
 
