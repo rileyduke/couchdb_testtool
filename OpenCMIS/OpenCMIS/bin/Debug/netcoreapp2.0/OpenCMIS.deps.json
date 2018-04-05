@@ -1,0 +1,38 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.0",
+    "signature": "2ef6b5579e6b43bdf87717a966fa66e682306de5"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.0": {
+      "OpenCMIS/1.0.0": {
+        "dependencies": {
+          "PortCMIS": "0.3.0"
+        },
+        "runtime": {
+          "OpenCMIS.dll": {}
+        }
+      },
+      "PortCMIS/0.3.0": {
+        "runtime": {
+          "lib/netstandard1.1/PortCMIS.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "OpenCMIS/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PortCMIS/0.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-S51c8Ot+bxkY3UPLFevOE7DTcTFCNXNUzFYAIA8o7gSPSasZ7+23YWFuqfczfScyFPgdiJ6c4R0lUJ6NbatsSw==",
+      "path": "portcmis/0.3.0",
+      "hashPath": "portcmis.0.3.0.nupkg.sha512"
+    }
+  }
+}

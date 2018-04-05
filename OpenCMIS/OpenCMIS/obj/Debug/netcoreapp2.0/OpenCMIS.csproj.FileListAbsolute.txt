@@ -1,0 +1,11 @@
+C:\Users\Work\Documents\GitHub\couchdb_testtool\OpenCMIS\OpenCMIS\bin\Debug\netcoreapp2.0\OpenCMIS.deps.json
+C:\Users\Work\Documents\GitHub\couchdb_testtool\OpenCMIS\OpenCMIS\bin\Debug\netcoreapp2.0\OpenCMIS.runtimeconfig.json
+C:\Users\Work\Documents\GitHub\couchdb_testtool\OpenCMIS\OpenCMIS\bin\Debug\netcoreapp2.0\OpenCMIS.runtimeconfig.dev.json
+C:\Users\Work\Documents\GitHub\couchdb_testtool\OpenCMIS\OpenCMIS\bin\Debug\netcoreapp2.0\OpenCMIS.dll
+C:\Users\Work\Documents\GitHub\couchdb_testtool\OpenCMIS\OpenCMIS\obj\Debug\netcoreapp2.0\OpenCMIS.csprojResolveAssemblyReference.cache
+C:\Users\Work\Documents\GitHub\couchdb_testtool\OpenCMIS\OpenCMIS\obj\Debug\netcoreapp2.0\OpenCMIS.csproj.CoreCompileInputs.cache
+C:\Users\Work\Documents\GitHub\couchdb_testtool\OpenCMIS\OpenCMIS\obj\Debug\netcoreapp2.0\OpenCMIS.AssemblyInfoInputs.cache
+C:\Users\Work\Documents\GitHub\couchdb_testtool\OpenCMIS\OpenCMIS\obj\Debug\netcoreapp2.0\OpenCMIS.AssemblyInfo.cs
+C:\Users\Work\Documents\GitHub\couchdb_testtool\OpenCMIS\OpenCMIS\bin\Debug\netcoreapp2.0\OpenCMIS.pdb
+C:\Users\Work\Documents\GitHub\couchdb_testtool\OpenCMIS\OpenCMIS\obj\Debug\netcoreapp2.0\OpenCMIS.dll
+C:\Users\Work\Documents\GitHub\couchdb_testtool\OpenCMIS\OpenCMIS\obj\Debug\netcoreapp2.0\OpenCMIS.pdb
