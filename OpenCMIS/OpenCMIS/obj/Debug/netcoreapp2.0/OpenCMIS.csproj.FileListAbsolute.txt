@@ -9,3 +9,4 @@ C:\Users\Work\Documents\GitHub\couchdb_testtool\OpenCMIS\OpenCMIS\obj\Debug\netc
 C:\Users\Work\Documents\GitHub\couchdb_testtool\OpenCMIS\OpenCMIS\bin\Debug\netcoreapp2.0\OpenCMIS.pdb
 C:\Users\Work\Documents\GitHub\couchdb_testtool\OpenCMIS\OpenCMIS\obj\Debug\netcoreapp2.0\OpenCMIS.dll
 C:\Users\Work\Documents\GitHub\couchdb_testtool\OpenCMIS\OpenCMIS\obj\Debug\netcoreapp2.0\OpenCMIS.pdb
+C:\Users\Work\Documents\GitHub\couchdb_testtool\OpenCMIS\OpenCMIS\bin\Debug\netcoreapp2.0\OpenCMIS.dll.config
