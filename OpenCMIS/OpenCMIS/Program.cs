@@ -121,7 +121,8 @@ namespace OpenCMIS
             var RelationshipCount = Relationships.rows.Count;
 
             //create session
-            ISession session = CreateSession();
+            var ns = new NemakiServer();
+            ISession session = ns.CreateSession();
             Console.WriteLine("Repository: " + session.GetRootFolder().Name);
 
             List<string> OutputLines = new List<string>();
@@ -138,6 +139,7 @@ namespace OpenCMIS
                 catch (CmisObjectNotFoundException e)
                 {
                     OutputLines.Add("Relationship: " + lr.id + ", Document: " + lr.value.sourceId);
+                    session.Delete(new ObjectId(lr.id));
                 }
                 try
                 {
@@ -146,6 +148,7 @@ namespace OpenCMIS
                 catch (CmisObjectNotFoundException e)
                 {
                     OutputLines.Add("Relationship: " + lr.id + ", Document: " + lr.value.targetId);
+                    session.Delete(new ObjectId(lr.id));
                 }
                 Progress.Report((double)i / RelationshipCount);
             }
@@ -163,7 +166,7 @@ namespace OpenCMIS
         /// Create session from app.config data
         /// </summary>
         /// <returns></returns>
-        public static ISession CreateSession()
+        public static ISession CreateSession_riley()
         {
             // default factory implementation
             SessionFactory factory = SessionFactory.NewInstance();
