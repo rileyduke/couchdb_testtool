@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>PortCMISWin</id>
+    <version>0.3.0</version>
+    <title>PortCMIS for Store Apps</title>
+    <authors>Apache Software Foundation</authors>
+    <owners>Apache Software Foundation</owners>
+    <projectUrl>https://chemistry.apache.org/dotnet/portcmis.html</projectUrl>
+    <licenseUrl>https://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>CMIS Client Library for .Net</description>
+    <releaseNotes>See https://issues.apache.org/jira/secure/ReleaseNote.jspa?version=12340229&amp;projectId=12310936</releaseNotes>
+    <copyright>Copyright 2015-2017</copyright>
+    <tags>CMIS</tags>
+  </metadata>
+  <files>
+    <file src="bin\Release\PortCMISWin.dll" target="lib\win81" />
+  </files>
+</package>
