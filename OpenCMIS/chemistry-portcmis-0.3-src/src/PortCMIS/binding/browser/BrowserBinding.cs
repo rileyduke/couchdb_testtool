@@ -1672,7 +1672,44 @@ namespace PortCMIS.Binding.Browser
 
             return result;
         }
+        public IContentStream GetContentStream(string repositoryId, string objectId, string docName)
+        {
+            // build URL
+            Uri servicedocUrl = new Uri("dummy");
+            string targetUrl = servicedocUrl.Scheme + "://" + servicedocUrl.Authority;
 
+            string link = targetUrl + "/core/atom/" + repositoryId + "/content/" + docName + "?id=" + objectId;
+
+            UrlBuilder url = new UrlBuilder(link);
+            //url.AddParameter(BindingConstants.ParamStreamId, streamId);
+
+            // get the content
+            IResponse resp = Session.GetHttpInvoker().InvokeGET(url, Session, null, null);
+
+            // check response code
+            if ((resp.StatusCode != 200) && (resp.StatusCode != 206))
+            {
+                throw ConvertStatusCode(resp.StatusCode, resp.Message, resp.ErrorContent, null);
+            }
+
+            // build result object
+            ContentStream result;
+            if (resp.StatusCode == 206)
+            {
+                result = new PartialContentStream();
+            }
+            else
+            {
+                result = new ContentStream();
+            }
+
+            result.FileName = resp.Filename;
+            result.Length = resp.ContentLength;
+            result.MimeType = resp.ContentType;
+            result.Stream = resp.Stream;
+
+            return result;
+        }
         public void UpdateProperties(string repositoryId, ref string objectId, ref string changeToken, IProperties properties,
             IExtensionsData extension)
         {

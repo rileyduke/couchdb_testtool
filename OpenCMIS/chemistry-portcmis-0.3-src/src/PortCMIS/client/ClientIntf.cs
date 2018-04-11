@@ -694,6 +694,9 @@ namespace PortCMIS.Client
         /// <returns>the content stream or <c>null</c> if the document has no content stream</returns>
         /// <cmis>1.0</cmis>
         IContentStream GetContentStream(IObjectId docId, string streamId, long? offset, long? length);
+        IContentStream GetContentStream(IObjectId docId, string docName);
+
+
 
         // permissions
 
@@ -1882,7 +1885,7 @@ namespace PortCMIS.Client
         /// </summary>
         /// <returns>the content stream or <c>null</c> if the stream ID is not associated with content</returns>
         IContentStream GetContentStream(string streamId);
-
+        IContentStream GetContentStreamWithName(string docName);
         /// <summary>
         /// Gets the content stream identified by the given stream ID with the given offset and length.
         /// </summary>

@@ -1287,6 +1287,33 @@ namespace PortCMIS.Client.Impl
         {
             return GetContentStream(streamId, null, null);
         }
+        public virtual IContentStream GetContentStreamWithName(string docName)
+        {
+            IContentStream contentStream = Session.GetContentStream(this, docName);
+            if (contentStream == null)
+            {
+                // no content stream
+                return null;
+            }
+
+            // the AtomPub binding doesn't return a file name
+            // -> get the file name from properties, if present
+            if (contentStream.FileName == null && ContentStreamFileName != null)
+            {
+                ContentStream newContentStream = new ContentStream()
+                {
+                    FileName = ContentStreamFileName,
+                    Length = contentStream.Length,
+                    MimeType = contentStream.MimeType,
+                    Stream = contentStream.Stream,
+                    Extensions = contentStream.Extensions
+                };
+
+                contentStream = newContentStream;
+            }
+
+            return contentStream;
+        }
 
         /// <inheritdoc/>
         public virtual IContentStream GetContentStream(string streamId, long? offset, long? length)
@@ -1294,6 +1321,8 @@ namespace PortCMIS.Client.Impl
             IContentStream contentStream = Session.GetContentStream(this, streamId, offset, length);
             if (contentStream == null)
             {
+
+                contentStream = Session.GetContentStream(this, this.Name);
                 // no content stream
                 return null;
             }

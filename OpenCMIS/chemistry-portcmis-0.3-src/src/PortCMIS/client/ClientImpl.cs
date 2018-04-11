@@ -1409,6 +1409,27 @@ namespace PortCMIS.Client.Impl
         {
             return GetContentStream(docId, null, null, null);
         }
+        public IContentStream GetContentStream(IObjectId docId,string docName)
+        {
+            if (docId == null || docId.Id == null)
+            {
+                throw new ArgumentException("Invalid document ID!", nameof(docId));
+            }
+
+            // get the content stream
+            IContentStream contentStream = null;
+            try
+            {
+                contentStream = Binding.GetObjectService().GetContentStream(RepositoryId, docId.Id,docName);
+            }
+            catch (CmisConstraintException)
+            {
+                // no content stream
+                return null;
+            }
+
+            return contentStream;
+        }
 
         /// <inheritdoc/>
         public IContentStream GetContentStream(IObjectId docId, string streamId, long? offset, long? length)
@@ -1417,7 +1438,7 @@ namespace PortCMIS.Client.Impl
             {
                 throw new ArgumentException("Invalid document ID!", nameof(docId));
             }
-
+            
             // get the content stream
             IContentStream contentStream = null;
             try

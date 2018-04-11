@@ -203,6 +203,7 @@ namespace PortCMIS.Binding.Services
         /// </summary>
         IContentStream GetContentStream(string repositoryId, string objectId, string streamId, BigInteger? offset, BigInteger? length,
             IExtensionsData extension);
+        IContentStream GetContentStream(string repositoryId, string objectId, string docName);
 
         /// <summary>
         /// Updates properties of the specified object.
