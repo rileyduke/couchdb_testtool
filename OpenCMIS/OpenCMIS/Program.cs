@@ -139,7 +139,7 @@ namespace OpenCMIS
                 catch (CmisObjectNotFoundException e)
                 {
                     OutputLines.Add("Relationship: " + lr.id + ", Document: " + lr.value.sourceId);
-                    session.Delete(new ObjectId(lr.id));
+                    //session.Delete(new ObjectId(lr.id));
                 }
                 try
                 {
