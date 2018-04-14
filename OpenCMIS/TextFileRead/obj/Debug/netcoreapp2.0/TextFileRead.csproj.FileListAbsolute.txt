@@ -1,0 +1,11 @@
+/home/riley/couchdb_testtool/couchdb_testtool/OpenCMIS/TextFileRead/bin/Debug/netcoreapp2.0/TextFileRead.deps.json
+/home/riley/couchdb_testtool/couchdb_testtool/OpenCMIS/TextFileRead/bin/Debug/netcoreapp2.0/TextFileRead.runtimeconfig.json
+/home/riley/couchdb_testtool/couchdb_testtool/OpenCMIS/TextFileRead/bin/Debug/netcoreapp2.0/TextFileRead.runtimeconfig.dev.json
+/home/riley/couchdb_testtool/couchdb_testtool/OpenCMIS/TextFileRead/bin/Debug/netcoreapp2.0/TextFileRead.dll
+/home/riley/couchdb_testtool/couchdb_testtool/OpenCMIS/TextFileRead/bin/Debug/netcoreapp2.0/TextFileRead.pdb
+/home/riley/couchdb_testtool/couchdb_testtool/OpenCMIS/TextFileRead/obj/Debug/netcoreapp2.0/TextFileRead.csproj.CoreCompileInputs.cache
+/home/riley/couchdb_testtool/couchdb_testtool/OpenCMIS/TextFileRead/obj/Debug/netcoreapp2.0/TextFileRead.AssemblyInfoInputs.cache
+/home/riley/couchdb_testtool/couchdb_testtool/OpenCMIS/TextFileRead/obj/Debug/netcoreapp2.0/TextFileRead.AssemblyInfo.cs
+/home/riley/couchdb_testtool/couchdb_testtool/OpenCMIS/TextFileRead/obj/Debug/netcoreapp2.0/TextFileRead.dll
+/home/riley/couchdb_testtool/couchdb_testtool/OpenCMIS/TextFileRead/obj/Debug/netcoreapp2.0/TextFileRead.pdb
+/home/riley/couchdb_testtool/couchdb_testtool/OpenCMIS/TextFileRead/bin/Debug/netcoreapp2.0/TextFileRead.dll.config
