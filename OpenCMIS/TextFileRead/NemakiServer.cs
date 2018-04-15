@@ -69,5 +69,23 @@ namespace TextFileRead
             return uri.Uri.ToString();
 
         }
+
+        /// <summary>
+        /// Gets the base url for the nemakiware couchdb server
+        /// </summary>
+        /// <returns></returns>
+        public String GetCouchDbBaseUrl()
+        {
+            //var prop = Properties.Settings.Default;
+            var scheme = ConfigurationManager.AppSettings["SubaruServerProtocol"];
+            var host = ConfigurationManager.AppSettings["SubaruServerHost"];
+            var port = Convert.ToInt32(ConfigurationManager.AppSettings["CouchDbServerPort"]);
+            var context = ConfigurationManager.AppSettings["SubaruRepositoryName"] + "/";
+
+            var uri = new UriBuilder(scheme, host, port, context);
+
+            return uri.Uri.ToString();
+
+        }
     }
 }
