@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "fbbb9a321ad05d54848c1ee2e7577c9e0115696e"
+    "signature": "b4afcccb38a2b9f2c94df2caae91707200a5f504"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,12 +9,29 @@
       "TextFileRead/1.0.0": {
         "dependencies": {
           "Newtonsoft.Json": "11.0.2",
+          "PortCMIS": "1.0.0",
           "System.Configuration.ConfigurationManager": "4.4.1"
         },
         "runtime": {
           "TextFileRead.dll": {}
         }
       },
+      "Microsoft.NETCore.Jit/1.0.2": {},
+      "Microsoft.NETCore.Portable.Compatibility/1.0.1": {
+        "dependencies": {
+          "Microsoft.NETCore.Runtime.CoreCLR": "1.0.2"
+        },
+        "runtime": {
+          "lib/netstandard1.0/System.ServiceModel.dll": {}
+        }
+      },
+      "Microsoft.NETCore.Runtime.CoreCLR/1.0.2": {
+        "dependencies": {
+          "Microsoft.NETCore.Jit": "1.0.2",
+          "Microsoft.NETCore.Windows.ApiSets": "1.0.1"
+        }
+      },
+      "Microsoft.NETCore.Windows.ApiSets/1.0.1": {},
       "Newtonsoft.Json/11.0.2": {
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
@@ -38,6 +55,14 @@
             "assetType": "runtime"
           }
         }
+      },
+      "PortCMIS/1.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Portable.Compatibility": "1.0.1"
+        },
+        "runtime": {
+          "PortCMIS.dll": {}
+        }
       }
     }
   },
@@ -46,6 +71,34 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Microsoft.NETCore.Jit/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ok2vWofa6X8WD9vc4pfLHwvJz1/B6t3gOAoZcjrjrQf7lQOlNIuZIZtLn3wnWX28DuQGpPJkRlBxFj7Z5txNqw==",
+      "path": "microsoft.netcore.jit/1.0.2",
+      "hashPath": "microsoft.netcore.jit.1.0.2.nupkg.sha512"
+    },
+    "Microsoft.NETCore.Portable.Compatibility/1.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Vd+lvLcGwvkedxtKn0U8s9uR4p0Lm+0U2QvDsLaw7g4S1W4KfPDbaW+ROhhLCSOx/gMYC72/b+z+o4fqS/oxVg==",
+      "path": "microsoft.netcore.portable.compatibility/1.0.1",
+      "hashPath": "microsoft.netcore.portable.compatibility.1.0.1.nupkg.sha512"
+    },
+    "Microsoft.NETCore.Runtime.CoreCLR/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-A0x1xtTjYJWZr2DRzgfCOXgB0JkQg8twnmtTJ79wFje+IihlLbXtx6Z2AxyVokBM5ruwTedR6YdCmHk39QJdtQ==",
+      "path": "microsoft.netcore.runtime.coreclr/1.0.2",
+      "hashPath": "microsoft.netcore.runtime.coreclr.1.0.2.nupkg.sha512"
+    },
+    "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SaToCvvsGMxTgtLv/BrFQ5IFMPRE1zpWbnqbpwykJa8W5XiX82CXI6K2o7yf5xS7EP6t/JzFLV0SIDuWpvBZVw==",
+      "path": "microsoft.netcore.windows.apisets/1.0.1",
+      "hashPath": "microsoft.netcore.windows.apisets.1.0.1.nupkg.sha512"
     },
     "Newtonsoft.Json/11.0.2": {
       "type": "package",
@@ -67,6 +120,11 @@
       "sha512": "sha512-cJV7ScGW7EhatRsjehfvvYVBvtiSMKgN8bOVI0bQhnF5bU7vnHVIsH49Kva7i7GWaWYvmEzkYVk1TC+gZYBEog==",
       "path": "system.security.cryptography.protecteddata/4.4.0",
       "hashPath": "system.security.cryptography.protecteddata.4.4.0.nupkg.sha512"
+    },
+    "PortCMIS/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

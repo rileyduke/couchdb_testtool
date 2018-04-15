@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PortCMIS.Client;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -9,15 +10,17 @@ namespace TextFileRead
     class Program
     {
         //folder where files are saved
-        public static string FileLocation = "/home/riley/"; //ConfigurationManager.AppSettings["SavedFileFolder"];
+        public static string FileLocation = ConfigurationManager.AppSettings["SavedFileFolder"];
         
         //beginning of file name for all archived files
-        public static string FileNamePre = "CoucbDBMissingRelationships";
+        public static string FileNamePre = ConfigurationManager.AppSettings["FileNamePre"];
+
+        public static string RelationshipStringPre = ConfigurationManager.AppSettings["RelationshipStringPre"];
 
         //get sorted list of files in specified folder
         public static string GetLatestFile()
         {
-            DirectoryInfo d = new DirectoryInfo(@FileLocation);
+            DirectoryInfo d = new DirectoryInfo(FileLocation);
             List<string> Files = d.GetFiles("*.txt")
                 .Where(x=>x.Name.Substring(0,x.Name.Length < FileNamePre.Length ? x.Name.Length : FileNamePre.Length) == FileNamePre)
                 .Select(x=>x.Name)
@@ -45,7 +48,7 @@ namespace TextFileRead
                     var words = Line.Split(" ");
                     for(var i=0; i<words.Length; i++)
                     {
-                        if(words[i] == "Relationship:")
+                        if(words[i] == RelationshipStringPre)
                         {
                             Contents.Add(words[i+1].Substring(0,words[i+1].Length-1));
                         }
@@ -58,14 +61,14 @@ namespace TextFileRead
 
         static void Main(string[] args)
         {
-            //create session
-            //var ns = new NemakiServer();
-            //ISession session = ns.CreateSession();
-
             //get relationship list from file
             var LatestFile = GetLatestFile();
             var RelationshipList = GetRelationshipList(FileLocation + LatestFile);
-            
+
+            //create session with nemakiware through portcmis
+            var ns = new NemakiServer();
+            ISession session = ns.CreateSession();
+
             //delete each relationship coming from the text file.
             var i = 0;
             foreach(string r in RelationshipList)
@@ -73,8 +76,7 @@ namespace TextFileRead
                 i++;
                 Console.WriteLine("Deleting Relationship: " + r + " (" + i.ToString() + " of " + RelationshipList.Count + ")");
                 //delete
-                //session.Delete(new ObjectId(r));
-                
+                session.Delete(new ObjectId(r));
             }
 
             Console.ReadKey();

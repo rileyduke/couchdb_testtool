@@ -8,5 +8,8 @@
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.4.1" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\chemistry-portcmis\PortCMIS\PortCMIS.csproj" />
+  </ItemGroup>
   
 </Project>
