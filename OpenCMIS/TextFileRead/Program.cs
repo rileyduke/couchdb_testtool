@@ -101,10 +101,7 @@ namespace TextFileRead
             var LatestFile = GetLatestFile();
             var RelationshipList = GetRelationshipList(FileLocation + LatestFile);
 
-            //create session with nemakiware through portcmis
-            //not going to use portCMIS here
-
-            PseudoDeleteDocument("4b6e795f8fb84d4531e6f59f04000d83");
+            
 
             //delete each relationship coming from the text file.
             var i = 0;
@@ -114,8 +111,8 @@ namespace TextFileRead
                 Console.WriteLine("Deleting Relationship: " + r + " (" + i.ToString() + " of " + RelationshipList.Count + ")");
                 //delete
                 //session.Delete(new ObjectId(r)); // not actually going to delete here
-                //instead of delete, do a pseudo-delete and change the document type from nemaki-relationship to nemaki-relationship-deleted
-                
+                //instead of delete, do a pseudo-delete and change the document type from cmis-relationship to cmis-relationship-deleted
+                PseudoDeleteDocument(r);
             }
 
             Console.ReadKey();
